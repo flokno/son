@@ -49,5 +49,4 @@ This is a valid _son_ string:
   "age": 57
 }
 ```
-It will be parsed to a list of three objects, where the first one delimited by
-`===` typically contains metadata information.
+It will be parsed into two lists. The first contains the metadata object, the second contains the data objects.

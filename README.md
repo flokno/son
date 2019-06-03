@@ -49,4 +49,9 @@ This is a valid _son_ string:
   "age": 57
 }
 ```
-It will be parsed into two lists. The first contains the metadata object, the second contains the data objects.
+It will be parsed into the metadata object, and a list containing the data objects with
+```python
+import son
+
+metadata, data = son.load('file.son')
+```

@@ -7,7 +7,7 @@ setup(
     name=__title__,
     version=__version__,
     description=__summary__,
-    long_description=README,
+    long_description=__readme__,
     long_description_content_type="text/markdown",
     url=__url__,
     author=__author__,

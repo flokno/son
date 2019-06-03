@@ -1,4 +1,4 @@
-import os.path
+import pathlib
 
 __all__ = [
     "__title__",
@@ -11,25 +11,22 @@ __all__ = [
     "__copyright__",
 ]
 
+# The directory containing this file
+HERE = pathlib.Path(__file__).parent
 
-try:
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-except NameError:
-    base_dir = None
+# The root directory
+ROOT = HERE.parent
+
+# The text of the README file
+__readme__ = (ROOT / "README.md").read_text()
 
 
 __title__ = "son"
 __summary__ = "Tools to read and write .son file"
 __url__ = "https://github.com/flokno/son"
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __short_version__ = "0.1"
-
-if base_dir is not None and os.path.exists(os.path.join(base_dir, ".commit")):
-    with open(os.path.join(base_dir, ".commit")) as fp:
-        __commit__ = fp.read().strip()
-else:
-    __commit__ = None
 
 __author__ = "Florian Knoop"
 

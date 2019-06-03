@@ -1,33 +1,30 @@
-from json import dumps, loads
+import son
+
+fname = "test.son"
 
 
-def dump(obj, indent=2):
-    return dumps(obj, indent=2)
-
-def parse(string):
-    return [loads(blob) for blob in string.split('---')]
+def dump(obj, file, **kwargs):
+    return son.dump(obj, file, **kwargs)
 
 
-# Metadate
+# Metadata
 m = {"purpose": "store biography data", "version": 0.1}
 
 # data points
 d1 = {"first name": "Hildegard", "second name": "Kneef", "age": 93}
-
 d2 = {"first name": "Wiglaf", "second name": "Droste", "age": 57}
 
-# son representation
-s = "\n".join([dump(m), "===", dump(d1), "---", dump(d2)])
+# dump metadata to file
+dump(m, fname, metadata=1, indent=2)
 
-print(s)
+# dump data points to file
+for obj in (d1, d2):
+    dump(obj, fname, indent=2)
 
 # load back
-raw_metadata, raw_data = s.split('===')
-
-metadata = parse(raw_metadata)
-data = parse(raw_data)
+metadata, data = son.load(fname)
 
 # check equality
-print('\nEqual after parsing?')
-print('Metadata:', metadata == [m])
-print('Data:    ', data == [d1, d2])
+print("\nEqual after parsing?")
+print("Metadata:", metadata == m)
+print("Data:    ", data == [d1, d2])

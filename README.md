@@ -19,6 +19,9 @@ thus combines the speed and efficiency of JSON with the sequential extensibility
 of YAML, see [example](#Example). It further adds to discern metadata from 
 actual data by using `===`.
 
+_son_ does **not** allow to overwrite data. In order to avoid accidental data loss,
+metada can only be written to fresh files, whereas data can only be appended to files.
+
 ## Who needs this?
 _son_ originated from the need to store computational data that is produced
 portion by portion on a computer. The requirements were:
@@ -26,8 +29,8 @@ portion by portion on a computer. The requirements were:
 - possible to store arbitrary data structures _including_ metadata,
 - easy to write and parse by a computer,
 - efficient to parse to allow files of up to GB size (takes forever to parse with YAML),
-- 100% sequential and incorruptible.
-
+- sequential and incorruptible,
+- resilient to data loss.
 
 ## Example
 This is a valid _son_ string:

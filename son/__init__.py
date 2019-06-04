@@ -13,20 +13,20 @@ delim1 = "==="
 delim2 = "---"
 
 
-def dumps(obj, metadata=False, dumper=json.dumps, **kwargs):
+def dumps(obj, is_metadata=False, dumper=json.dumps, **kwargs):
     """dump an object to string representation
-    
+
     Args:
         obj (Object): object to be dumped to string
-        metadata (bool): if yes, delimit with === instead of ---
+        is_metadata (bool): if yes, delimit with === instead of ---
         dumper (encoder): e.g. json.dumps
         **kwargs: args to be passed to the dumper
-        
+
     """
 
     rep = dumper(obj, **kwargs)
 
-    if metadata:
+    if is_metadata:
         delimiter = delim1
     else:
         delimiter = delim2
@@ -36,12 +36,12 @@ def dumps(obj, metadata=False, dumper=json.dumps, **kwargs):
     return rep + "{}".format(delimiter)
 
 
-def dump(obj, file, metadata=False, **kwargs):
+def dump(obj, file, is_metadata=False, **kwargs):
     """dump an object to son file. metadata can only be written once."""
 
-    rep = dumps(obj, metadata=metadata, **kwargs)
+    rep = dumps(obj, is_metadata=is_metadata, **kwargs)
 
-    if metadata:
+    if is_metadata:
         if Path(file).exists():
             msg = "{} exists, possibility of data loss!".format(file)
             raise FileExistsError(msg)
@@ -61,7 +61,7 @@ def loads(string, loader=json.loads, **kwargs):
         string (str): the string to load
     Returns:
         metadata, data: the loaded json blobs within the string
-        
+
     """
 
     data = None
@@ -87,13 +87,14 @@ def loads(string, loader=json.loads, **kwargs):
 
 def load(file, **kwargs):
     """load and decode son file
-    
+
     Args:
         file (path/str): load file
-        
+        kwargs: kwargs for son.loads
+
     Returns:
         metadata, data: content of file
-        
+
     """
 
     with open(file) as fp:
@@ -103,6 +104,6 @@ def load(file, **kwargs):
             raise EmptyFileWarning(msg)
             return None, None
 
-        obj = loads(string)
+        obj = loads(string, **kwargs)
 
     return obj

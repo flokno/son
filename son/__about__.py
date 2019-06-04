@@ -25,7 +25,7 @@ __title__ = "son"
 __summary__ = "Tools to read and write .son file"
 __url__ = "https://github.com/flokno/son"
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __short_version__ = "0.1"
 
 __author__ = "Florian Knoop"

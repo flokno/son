@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "son"
+version = "0.1.4"
+description = "Tools to read and write .son files"
+authors = ["Florian Knoop"]
+license = "ISC"
+readme = "README.md"
+repository = "https://github.com/flokno/son"
+keywords = ["file format", "data"]
+
+[tool.poetry.dependencies]
+python = ">=2.7"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

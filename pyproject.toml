@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "son"
-version = "0.1.4"
+version = "0.1.5"
 description = "Tools to read and write .son files"
 authors = ["Florian Knoop"]
 license = "ISC"

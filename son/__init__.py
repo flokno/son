@@ -1,13 +1,12 @@
 """son (sequential object notation) <https://github.com/flokno/son>"""
 
+import warnings
 from pathlib import Path
 
 try:
     import ujson as json
 except ModuleNotFoundError:
     import json
-
-from .misc import FileExistsError, EmptyStringWarning, EmptyFileWarning
 
 delim1 = "==="
 delim2 = "---"
@@ -37,7 +36,15 @@ def dumps(obj, is_metadata=False, dumper=json.dumps, **kwargs):
 
 
 def dump(obj, file, is_metadata=False, **kwargs):
-    """dump an object to son file. metadata can only be written once."""
+    """dump an object to son file. metadata can only be written once.
+
+    Args:
+        obj (Object): object to be dumped to string
+        file (str or Path): file to dump to
+        is_metadata (bool): if yes, delimit with === instead of ---
+        **kwargs: args to be passed to son.dumps
+
+    """
 
     rep = dumps(obj, is_metadata=is_metadata, **kwargs)
 
@@ -59,6 +66,8 @@ def loads(string, loader=json.loads, **kwargs):
 
     Args:
         string (str): the string to load
+        loader (decoder): e.g. json.loads
+        **kwargs: kwargs that get passed to the loader
     Returns:
         metadata, data: the loaded json blobs within the string
 
@@ -69,7 +78,7 @@ def loads(string, loader=json.loads, **kwargs):
 
     if string.strip() == "":
         msg = "Empty string was given, return None, None"
-        raise EmptyStringWarning(msg)
+        warnings.warn(msg)
         return None, None
 
     try:
@@ -101,7 +110,7 @@ def load(file, **kwargs):
         string = fp.read()
         if string.strip() == "":
             msg = "Empty string was given, return None, None"
-            raise EmptyFileWarning(msg)
+            warnings.warn(msg)
             return None, None
 
         obj = loads(string, **kwargs)

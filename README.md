@@ -1,7 +1,7 @@
 son | sequential object notation
 ===
 
-![python](https://img.shields.io/badge/python-2.7--3.7-lightgrey.svg?style=flat-square)
+![python](https://img.shields.io/badge/python-3.5--3.7-lightgrey.svg?style=flat-square)
 [![pypi](https://img.shields.io/pypi/v/son.svg?style=flat-square)](https://pypi.org/project/son/)
 ![license](https://img.shields.io/pypi/l/son.svg?color=red&style=flat-square)
 [![code style](https://img.shields.io/badge/code%20style-black-202020.svg?style=flat-square)](https://github.com/ambv/black)

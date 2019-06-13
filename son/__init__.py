@@ -30,7 +30,7 @@ def dumps(obj, is_metadata=False, dumper=json.dumps, **kwargs):
     else:
         delimiter = delim2
 
-    delimiter = "\n{}\n".format(delimiter)
+    delimiter = "{}".format(delimiter)
 
     return rep + "{}".format(delimiter)
 

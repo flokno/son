@@ -8,8 +8,8 @@ try:
 except ModuleNotFoundError:
     import json
 
-delim1 = "==="
-delim2 = "---"
+delim1 = "\n===\n"
+delim2 = "\n---\n"
 
 
 def dumps(obj, is_metadata=False, dumper=json.dumps, **kwargs):

@@ -8,6 +8,11 @@ try:
 except ModuleNotFoundError:
     import json
 
+try:
+    from progress.bar import Bar
+except ModuleNotFoundError:
+    Bar = None
+
 delim1 = "\n===\n"
 delim2 = "\n---\n"
 
@@ -61,12 +66,13 @@ def dump(obj, file, is_metadata=False, **kwargs):
             f.write(rep)
 
 
-def loads(string, loader=json.loads, **kwargs):
+def loads(string, loader=json.loads, verbose=False, **kwargs):
     """decode string to object
 
     Args:
         string (str): the string to load
         loader (decoder): e.g. json.loads
+        verbose (boolean): show progressbar
         **kwargs: kwargs that get passed to the loader
     Returns:
         metadata, data: the loaded json blobs within the string
@@ -89,16 +95,24 @@ def loads(string, loader=json.loads, **kwargs):
 
     raw_data = data_string.split(delim2)
 
-    data = [loader(blob, **kwargs) for blob in raw_data if blob.strip()]
+    if verbose and Bar:
+        bar = Bar("[son] progress:   ")
+        data = []
+        for blob in bar.iter(raw_data):
+            if blob.strip():
+                data.append(loader(blob, **kwargs))
+    else:
+        data = [loader(blob, **kwargs) for blob in raw_data if blob.strip()]
 
     return metadata, data
 
 
-def load(file, **kwargs):
+def load(file, verbose=False, **kwargs):
     """load and decode son file
 
     Args:
         file (path/str): load file
+        verbose (boolean): be verbose
         kwargs: kwargs for son.loads
 
     Returns:
@@ -113,6 +127,8 @@ def load(file, **kwargs):
             warnings.warn(msg)
             return None, None
 
-        obj = loads(string, **kwargs)
+        if verbose:
+            print(f"[son] parse file:  {file}", flush=True)
+        obj = loads(string, verbose=verbose, **kwargs)
 
     return obj

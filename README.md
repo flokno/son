@@ -64,3 +64,6 @@ import son
 
 metadata, data = son.load('file.son')
 ```
+
+## Changelog
+v.0.2.2: optionally be verbose and show progressbar with `progress` package (optional dependency, install with `pip install son[progress]`)

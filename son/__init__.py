@@ -9,7 +9,10 @@ except ModuleNotFoundError:
     import json
 
 try:
+    import sys
     from progress.bar import Bar
+    Bar.file = sys.stdout
+    # Bar.check_tty = False
 except ModuleNotFoundError:
     Bar = None
 

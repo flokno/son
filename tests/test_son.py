@@ -43,3 +43,11 @@ def test_write_again(fname=fname):
         raise RuntimeError("FIXME")
     except FileExistsError:
         pass
+
+def test_read_verbose(fname=fname):
+    """test son.load"""
+    metadata, data = son.load(fname, verbose=True)
+
+    assert metadata == m
+    assert data == [d1, d2]
+

@@ -8,13 +8,7 @@ try:
 except ModuleNotFoundError:
     import json
 
-try:
-    import sys
-    from progress.bar import Bar
-    Bar.file = sys.stdout
-    # Bar.check_tty = False
-except ModuleNotFoundError:
-    Bar = None
+from son.progressbar import progressbar
 
 delim1 = "\n===\n"
 delim2 = "\n---\n"
@@ -28,7 +22,6 @@ def dumps(obj, is_metadata=False, dumper=json.dumps, **kwargs):
         is_metadata (bool): if yes, delimit with === instead of ---
         dumper (encoder): e.g. json.dumps
         **kwargs: args to be passed to the dumper
-
     """
 
     rep = dumper(obj, **kwargs)
@@ -51,7 +44,6 @@ def dump(obj, file, is_metadata=False, **kwargs):
         file (str or Path): file to dump to
         is_metadata (bool): if yes, delimit with === instead of ---
         **kwargs: args to be passed to son.dumps
-
     """
 
     rep = dumps(obj, is_metadata=is_metadata, **kwargs)
@@ -79,7 +71,6 @@ def loads(string, loader=json.loads, verbose=False, **kwargs):
         **kwargs: kwargs that get passed to the loader
     Returns:
         metadata, data: the loaded json blobs within the string
-
     """
 
     data = None
@@ -98,10 +89,10 @@ def loads(string, loader=json.loads, verbose=False, **kwargs):
 
     raw_data = data_string.split(delim2)
 
-    if verbose and Bar:
-        bar = Bar("[son] progress:   ")
+    if verbose:
+        prefix = "[son] progress:   "
         data = []
-        for blob in bar.iter(raw_data):
+        for blob in progressbar(raw_data, prefix=prefix):
             if blob.strip():
                 data.append(loader(blob, **kwargs))
     else:
@@ -120,7 +111,6 @@ def load(file, verbose=False, **kwargs):
 
     Returns:
         metadata, data: content of file
-
     """
 
     with open(file) as fp:

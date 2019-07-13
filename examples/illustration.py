@@ -19,7 +19,7 @@ for obj in (d1, d2):
     son.dump(obj, fname, indent=2)
 
 # load back
-metadata, data = son.load(fname)
+metadata, data = son.load(fname, verbose=True)
 
 # check equality
 print("\nEqual after parsing?")

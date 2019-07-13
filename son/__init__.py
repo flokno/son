@@ -113,7 +113,14 @@ def load(file, verbose=False, **kwargs):
         metadata, data: content of file
     """
 
-    with open(file) as fp:
+    if Path(file).suffix == ".bz2":
+        from bz2 import open as read
+    elif Path(file).suffix == ".gz":
+        from gzip import open as read
+    else:
+        read = open
+
+    with read(file, "rt") as fp:
         string = fp.read()
         if string.strip() == "":
             msg = "Empty string was given, return None, None"

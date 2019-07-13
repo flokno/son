@@ -25,9 +25,14 @@ def progressbar(it, prefix="progress:", size=35, file=sys.stdout):
 
     show(0)
 
+    ii = 0
     for ii, item in enumerate(it):
         yield item
-        show(ii + 1)
+        if file.isatty():
+            show(ii + 1)
 
-    file.write("\n")
-    file.flush()
+    if file.isatty():
+        file.write("\n")
+        file.flush()
+    else:
+        show(ii + 1)

@@ -66,6 +66,8 @@ metadata, data = son.load('file.son')
 ```
 
 ## Changelog
+v.0.2.5: progressbar is only shown when a terminal is attached (`.isatty()`)
+
 v.0.2.4: progressbar without external dependency
 
 v.0.2.3: `progress.bar` prints to `stdout` instead of `stderr`

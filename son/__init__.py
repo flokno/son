@@ -90,7 +90,7 @@ def loads(string, loader=json.loads, verbose=False, **kwargs):
     raw_data = data_string.split(delim2)
 
     if verbose:
-        prefix = "[son] progress:   "
+        prefix = "[son] process:   "
         data = []
         for blob in progressbar(raw_data, prefix=prefix):
             if blob.strip():
@@ -120,6 +120,9 @@ def load(file, verbose=False, **kwargs):
     else:
         read = open
 
+    if verbose:
+        print(f"[son] read file:  {file}", flush=True)
+
     with read(file, "rt") as fp:
         string = fp.read()
         if string.strip() == "":
@@ -127,8 +130,6 @@ def load(file, verbose=False, **kwargs):
             warnings.warn(msg)
             return None, None
 
-        if verbose:
-            print(f"[son] parse file:  {file}", flush=True)
         obj = loads(string, verbose=verbose, **kwargs)
 
     return obj

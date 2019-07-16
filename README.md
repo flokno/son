@@ -66,6 +66,8 @@ metadata, data = son.load('file.son')
 ```
 
 ## Changelog
+v.0.3.2: fix for interactively working in `ipython` console
+
 v.0.3.1: inform _before_ file is read, makes more sense when that takes some time
 
 v.0.3.0: support for reading compressed `.bz2` and `.gz` files

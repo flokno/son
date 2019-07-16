@@ -44,6 +44,7 @@ def test_write_again(fname=fname):
     except FileExistsError:
         pass
 
+
 def test_read_verbose(fname=fname):
     """test son.load"""
     metadata, data = son.load(fname, verbose=True)
@@ -51,3 +52,9 @@ def test_read_verbose(fname=fname):
     assert metadata == m
     assert data == [d1, d2]
 
+
+if __name__ == "__main__":
+    test_write()
+    test_read()
+    test_write_again()
+    test_read_verbose()

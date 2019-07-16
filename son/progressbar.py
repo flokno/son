@@ -28,10 +28,10 @@ def progressbar(it, prefix="progress:", size=35, file=sys.stdout):
     ii = 0
     for ii, item in enumerate(it):
         yield item
-        if file.isatty():
+        if hasattr(file, "isatty") and file.isatty():
             show(ii + 1)
 
-    if file.isatty():
+    if hasattr(file, "isatty") and file.isatty():
         file.write("\n")
         file.flush()
     else:

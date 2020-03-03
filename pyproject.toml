@@ -5,6 +5,7 @@ description = "Tools to read and write .son files"
 authors = ["Florian Knoop"]
 license = "ISC"
 readme = "README.md"
+homepage = "https://flokno.github.io/son/"
 repository = "https://github.com/flokno/son"
 keywords = ["file format", "data"]
 

@@ -1,0 +1,28 @@
+site_name: son | sequential object notation
+
+repo_url: https://github.com/flokno/son
+
+copyright: 'Copyright &copy; 2019 - 2020 Florian Knoop'
+
+theme:
+    name: 'material'
+    palette:
+        primary: 'Blue Grey'
+    logo: 'images/logo.svg'
+    favicon: 'images/logo.png'
+    include_search_page: false
+    
+
+extra:
+  social:
+    - type: github
+      link: https://github.com/flokno/son
+
+nav:
+    - about: README.md
+    - license: license.md
+
+
+markdown_extensions:
+    - toc:
+        permalink: "#"
